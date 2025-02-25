@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!--Header-->
+    <%- include('layouts/header') %>
+    <body>
+        <!-- Navigation-->
+        <%- include('layouts/navbar') %>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('img/g.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>G Test</h1>
+                            <span class="subheading">You will need to enter your license Number</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content--> 
+        <article class="d-flex justify-content-center">
+            <div class="w-50">
+                <h1 class="text-center mb-4">Retrieve User Data</h1>
+                <form id="fetchDataForm" action="/fetchUser" method="POST" class="text-center">
+                    <div class="form-floating mb-3">
+                        <input 
+                            class="form-control" id="licenseNumber" name="licenseNumber" type="text" placeholder="Enter License Number..." maxlength="8" required />
+                        <label for="licenseNumber">License Number (8 characters)</label>
+                        <div class="invalid-feedback">
+                            Please provide a valid license number (8 characters).
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-lg" type="submit">Fetch Data</button>
+                </form>
+
+                <!-- Display user data if available -->
+                <% if (user) { %>
+                    <div class="container mt-5">
+                        <h1 class="text-center mb-4">User Information</h1>
+                        <div class="card mb-4">
+                            <div class="card-header">Personal Details</div>
+                            <div class="card-body">
+                                <p><strong>First Name:</strong> <%= user.firstName %></p>
+                                <p><strong>Last Name:</strong> <%= user.lastName %></p>
+                                <p><strong>License Number:</strong> <%= user.licenseNumber %></p>
+                                <p><strong>Age:</strong> <%= user.age %></p>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">Car Information</div>
+                            <div class="card-body">
+                                <p><strong>Make:</strong> <%= user.carDetails.make %></p>
+                                <p><strong>Model:</strong> <%= user.carDetails.model %></p>
+                                <p><strong>Year:</strong> <%= user.carDetails.year %></p>
+                                <p><strong>Plate Number:</strong> <%= user.carDetails.platno %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+
+                <!-- Display message if no user is found -->
+                <% if (message) { %>
+                    <div class="container mt-5">
+                        <h1 class="text-center mb-4"><%= message %></h1>
+                        <a href="/G2" class="btn btn-primary">Go to G2 Page</a>
+                    </div>
+                <% } %>
+            </div>
+        </article>
+        <!-- Footer-->
+        <%- include('layouts/footer') %>
+        <!-- Bootstrap core JS-->
+        <%- include('layouts/script') %>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
